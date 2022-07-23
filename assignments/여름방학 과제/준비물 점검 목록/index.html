@@ -19,13 +19,37 @@
 		<div id="itemList"></div>
 	</div>
 	<script>
-		let toDoList = document.getElementById("item").value;
-
 		let list = [];
 
-		document.getElementById("add").addEventListener("click", function() {
-			document.getElementById("itemList").innerHTML = `<h4>${toDoList}</h4>`;
-		})
+		let addBtn = document.getElementById("add");
+		addBtn.addEventListener("click", function () {
+			let item = document.getElementById("item").value;
+			if (item != null) {
+				list.push(item);
+				document.getElementById("item").value = "";
+			}
+
+			addList();
+		});
+
+		function addList() {
+			let showList = "<ul>"
+			for (let i = 0; i < list.length; i++) {
+				showList += "<li>" + list[i] + "<span class='close' id=" + i + ">X</span></li>";
+			}
+			showList += "</ul>";
+
+			document.getElementById("itemList").innerHTML = `${showList}`;
+
+			let deleteBtn = document.getElementsByClassName("close");
+			for (let i = 0; i < deleteBtn.length; i++) {
+				deleteBtn[i].addEventListener("click", function() {
+					let id = this.getAttribute("id");
+					list.splice(id, 1);
+					addList();
+				});
+			}
+		}
 	</script>
 </body>
 
