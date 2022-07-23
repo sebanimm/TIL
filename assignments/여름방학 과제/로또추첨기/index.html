@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로또 추첨기</title>
     <link rel="stylesheet" href="style.css">
+
 <body>
     <header>
         <h2 class="title">로또 추첨기</h2>
@@ -29,22 +30,37 @@
 
     <script>
         function getNum() {
+            let ball = document.getElementsByClassName("ball");
 
-            let ball = document.getElementsByClassName("[        ]"); //class이름이 ball인 요소 가져오기
-            //추첨 후에, 또 추첨하기 버튼을 누르면 이전에 들어간 번호가 남아있어
-            //초기화 해주기 위한 부분 :for문 돌리며 ball 안의 텍스트 ?로 넣기
+            for (let i = 1; i <= 7; i++) {
+                let reset = document.getElementById(`num${i}`);
+                reset.innerHTML = `<span>?</span>`;
+            }
 
+            let rottoNum = [];
 
+            let count = 0;
+            for (let i = 0; i < 7; i++) {
+                let randomNumber = Math.floor(Math.random() * 45) + 1;
+                rottoNum[i] = randomNumber;
 
-            let rottoNum = []; //추첨한 로또 번호를 담을 배열
-            //랜덤함수를 통해 랜덤으로 번호생성
+                while (1) {
+                    if (rottoNum.indexOf(randomNumber) < 0) {
+                        rottoNum[count] = randomNumber;
+                        count += 1;
+                        break;
+                    } else {
+                        randomNumber = Math.floor(Math.random() * 45) + 1;
+                    }
+                } 
+            }
 
-
-            //추첨된 번호가 중복됐을 시, 재추첨하기
-
-            //공영역에 번호 나타내기
-
-
+            let delay = 0;
+            for (let i = 0; i < rottoNum.length; i++) {
+                let result = document.getElementById(`num${i + 1}`);
+                setTimeout(() => { result.innerHTML = `<span>${rottoNum[i]}</span>`}, delay);
+                delay += 1000;
+            }
         }
     </script>
 </body>
