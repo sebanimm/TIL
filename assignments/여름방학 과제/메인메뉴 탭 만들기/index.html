@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
+
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
 
@@ -31,19 +32,18 @@
 
   <button id="default" class="tab" onclick="openMenu('About', this, 'tomato')">About</button>
   <button class="tab" onclick="openMenu('Products', this, 'darkolivegreen')">Products</button>
-  <button class="tab" onclick="openMenu('Technology', this,'dodgerblue')">Technology</button>
-  <button class="tab" onclick="openMenu('Downloads', this,'orange')">Downloads</button>
+  <button class="tab" onclick="openMenu('Technology',this,             'dodgerblue')">Technology</button>
+  <button class="tab" onclick="openMenu('Downloads',this,             'orange')">Downloads</button>
   <div id="test" style="border: 1px solid #555;"></div>
   <script>
-    // 1. 시작시 default  아이디를 사용하는 요소가 선택된 것으로 처리 -> 선택된 요소.click();
-    function openMenu(id, object, color) {
-      
-      // 2. 모든  content  클래스를 사용하는 요소들을 보이지 않도록 처리./
-
+    function openMenu(id, target, color) {
+      let $content = document.querySelectorAll('.content');
+      let $id = document.getElementById(id);
+      $content.forEach((item, index) => {
+        item.style.display = "none";
+      });
+      $id.style.display = "block";
     }
-    // 3. 모든  tab   클래스를 사용하는 요소들(탭 버튼)의 배경을 제거. //
-    // 4. 선택된(target) 요소만 보이도록 설정.//
-    // 5. 선택된 탭의 배경을 변경.//
 
   </script>
 </body>
