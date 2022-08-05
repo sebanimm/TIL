@@ -40,20 +40,17 @@ void quickSort(int arr[], int left, int right)
 
 int main()
 {
-    int a[100000], b;
-    scanf("%d", &b);
+    int a[7];
 
-    for (int i = 0; i < b; i++)
+    for (int i = 0; i < 7; i++)
     {
         scanf("%d", &a[i]);
     }
 
-    quickSort(a, 0, b - 1);
+    quickSort(a, 0, 6);
 
-    for (int i = 0; i < b; i++)
-    {
-        printf("%d ", a[i]);
-    }
+    printf("%d\n%d", a[6], a[5]);
 
     return 0;
 }
+
