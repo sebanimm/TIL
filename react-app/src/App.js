@@ -1,4 +1,15 @@
 import { useState, useEffect } from "react";
+import styled from 'styled-components';
+
+const StyledBtn = styled.button`
+  color: white;
+  background-color: black;
+`;
+
+const ReStyledBtn = styled(StyledBtn)`
+  font-size: 24px;
+  color: tomato;
+`;
 
 function App() {
   const [counter, setValue] = useState(0);
@@ -37,7 +48,9 @@ function App() {
         onChange={onChange}
       ></input>
       <h1>{counter}</h1>
-      <button onClick={onClick}>click me</button>
+      <StyledBtn onClick={onClick}>click me</StyledBtn>
+      <br />
+      <ReStyledBtn>DON'T click me</ReStyledBtn>
     </div>
   );
 }
