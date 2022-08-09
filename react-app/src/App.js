@@ -1,56 +1,36 @@
-import { useState, useEffect } from "react";
-import styled from 'styled-components';
-
-const StyledBtn = styled.button`
-  color: white;
-  background-color: black;
-`;
-
-const ReStyledBtn = styled(StyledBtn)`
-  font-size: 24px;
-  color: tomato;
-`;
+import { useState } from "react";
 
 function App() {
-  const [counter, setValue] = useState(0);
-  const [keyword, setKeyword] = useState("");
-
-  const onClick = () => {
-    setValue((prev) => prev + 1);
+  const [toDo, setToDo] = useState("");
+  const [toDos, setToDos] = useState([]);
+  const onChange = (event) => setToDo(event.target.value);
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (toDo === "") {
+      return;
+    }
+    setToDos((currentArray) => [toDo, ...currentArray]);
+    setToDo("");
   };
 
-  const onChange = (event) => {
-    setKeyword(event.target.value);
-  };
-
-  useEffect(() => {
-    console.log("once");
-  }, []);
-
-  useEffect(() => {
-    console.log("keyword changes");
-  }, [keyword]);
-
-  useEffect(() => {
-    console.log("counter changes");
-  }, [counter]);
-
-  useEffect(() => {
-    console.log("counter and keyword changes!");
-  }, [keyword, counter]);
-  
   return (
     <div>
-      <input
-        value={keyword}
-        type="text"
-        placeholder="search"
-        onChange={onChange}
-      ></input>
-      <h1>{counter}</h1>
-      <StyledBtn onClick={onClick}>click me</StyledBtn>
-      <br />
-      <ReStyledBtn>DON'T click me</ReStyledBtn>
+      <h1>My To Dos ({toDos.length})</h1>
+      <form onSubmit={onSubmit}>
+        <input
+          onChange={onChange}
+          value={toDo}
+          type="text"
+          placeholder="Write your to do"
+        ></input>
+        <button>Add To Do</button>
+      </form>
+      <hr />
+      <ul>
+        {toDos.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
