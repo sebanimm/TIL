@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(void)
+int main()
 {
   int a, b, c[100], d[100], sum = 0;
   scanf("%d", &a);

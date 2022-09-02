@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(void)
+int main()
 {
   int x, y, a[100][100], b[100][100];
   scanf("%d %d", &x, &y);
