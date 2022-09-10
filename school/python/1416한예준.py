@@ -8,11 +8,11 @@ Original file is located at
 """
 
 scoreDict = {
-    "국어" : 90,
+    "국어": 90,
     "영어": 70,
-    "수학":90,
-    "파이썬":80,
-    "알고리즘":100
+    "수학": 90,
+    "파이썬": 80,
+    "알고리즘": 100
 }
 
 print(scoreDict["국어"])
@@ -25,14 +25,14 @@ list = []
 evenList = []
 oddList = []
 
-for i in range(5) :
-  list.append(int(input()))
+for i in range(5):
+    list.append(int(input()))
 
-for i in range(5) :
-  if (list[i] % 2 == 0) :
-    evenList.append(list[i])
-  else :
-    oddList.append(list[i])
+for i in range(5):
+    if (list[i] % 2 == 0):
+        evenList.append(list[i])
+    else:
+        oddList.append(list[i])
 
 print(evenList)
 print(oddList)
@@ -46,16 +46,16 @@ ymin = [19, 18.8, 18.6, 19.5, 19.2, 19.5, 19.8, 19.6, 19.2, 19.8]
 # + 년도 출력하기
 # + 년도와 평균기온 딕셔너리 만들기
 # + 평균기온 최소일 때 해당년도 추출하기 예) 2012년 – 14.5℃
-# + 최고기온 최대일 때 해당년도 추출하기 예) 2016년 – 19.6℃ 
+# + 최고기온 최대일 때 해당년도 추출하기 예) 2016년 – 19.6℃
 # + 최저기온 최소일 때 해당년도 추출하기 예) 2012년 – 18.6℃
 
 # https://github.com/lsa-src/winterSch/blob/main/weatherStatistics.py
 
 yOdd = []
 
-for item in y :
-  if item % 2 == 1 :
-    yOdd.append(item)
+for item in y:
+    if item % 2 == 1:
+        yOdd.append(item)
 
 print(f"홀수년도 : {yOdd}")
 
@@ -70,11 +70,11 @@ mint
 
 ytemp.values()
 
-for y, tp in ytemp.items() :
-  if tp == mint :
-    print(y)
+for y, tp in ytemp.items():
+    if tp == mint:
+        print(y)
 
-for y, tp in ytemp.items() :
-  if tp == max(ytemp.values()) :
-    print(y)
-    break;
+for y, tp in ytemp.items():
+    if tp == max(ytemp.values()):
+        print(y)
+        break
