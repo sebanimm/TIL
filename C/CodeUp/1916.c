@@ -10,6 +10,7 @@ long long int f(int k)
   {
     return memo[k] = (f(k - 1) + f(k - 2)) % 10009;
   }
+
   return memo[k];
 }
 
