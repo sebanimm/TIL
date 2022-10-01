@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(void)
+int main()
 {
 
     int a, b, c, d = -1, result, input, count = 0;
@@ -15,8 +15,7 @@ int main(void)
         c = (a + b) % 10;
         d = (b * 10) + c;
         input = d;
-        count += 1;
+        count++;
     }
-    
     printf("%d", count);
 }
