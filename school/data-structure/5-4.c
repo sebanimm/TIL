@@ -21,12 +21,12 @@ int main()
   Stack s;
   char expr[20];
 
-  printf("°ıÈ£Æ÷ÇÔ ¼ö½Ä ÀÔ·Â : ");
+  printf("ê´„í˜¸í¬í•¨ ìˆ˜ì‹ ì…ë ¥ : ");
   scanf("%s", expr);
   if (checkTest(expr))
-    printf("¼º°ø");
+    printf("ì„±ê³µ");
   else
-    printf("½ÇÆĞ");
+    printf("ì‹¤íŒ¨");
   return 0;
 }
 void initStack(Stack *s)

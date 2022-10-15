@@ -12,7 +12,7 @@ typedef struct Goods
 int main()
 {
   Goods *item1 = malloc(sizeof(Goods));
-  strcpy(item1->name, "±³Çâ°îÀüÁı");
+  strcpy(item1->name, "êµí–¥ê³¡ì „ì§‘");
   item1->price = 100000;
   item1->limit = false;
   Goods *ptr;
@@ -20,9 +20,9 @@ int main()
   ptr->limit = true;
 
   if (ptr->limit == true)
-    printf("ÇÑÁ¤ÆÇ\n");
+    printf("í•œì •íŒ\n");
   else
-    printf("ÀÏ¹İÆÇ\n");
+    printf("ì¼ë°˜íŒ\n");
 
   return 0;
 }

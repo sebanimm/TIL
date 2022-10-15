@@ -1,9 +1,9 @@
 #include <stdio.h>
-#define MAX 100
-typedef char element;
-typedef struct Stack
+#define MAX 300
+typedef int element;
+typedef struct
 {
-  element str[MAX];
+  element data[300];
   int top;
 } Stack;
 
@@ -17,7 +17,7 @@ int isFull(Stack *s)
   return s->top == MAX;
 }
 
-int empty(Stack *s)
+int isEmpty(Stack *s)
 {
   return s->top == -1;
 }
@@ -30,38 +30,76 @@ void push(Stack *s, char c)
   }
   else
   {
-    s->str[++(s->top)] = c;
+    s->data[++(s->top)] = c;
   }
 }
 
 char pop(Stack *s)
 {
   char Temp;
-  if (empty(s))
+  if (isEmpty(s))
   {
     printf("EMPTY");
     return 0;
   }
 
-  Temp = s->str[(s->top)--];
+  Temp = s->data[(s->top)--];
   return Temp;
 }
 
-int palindrome(char String[])
+int main()
 {
-  Stack S;
-  int i;
-  //코드작성
-}
+  char expr[300];
+  Stack s;
 
-int main(void)
-{
-  char str[MAX];
-  scanf("%s", str);
+  initStack(&s);
+  gets(expr);
 
-  if (palindrome(str))
-    printf("TRUE");
-  else
-    printf("FALSE");
+  for (int i = 0; expr[i] != '\0'; i++)
+  {
+    if (expr[i] == ' ')
+    {
+      continue;
+    }
+    if (expr[i] == '*' || expr[i] == '+' || expr[i] == '-' || expr[i] == '/')
+    {
+      char a = pop(&s);
+      char b = pop(&s);
+      if (a >= 48)
+      {
+        a -= 48;
+      }
+
+      if (b >= 48)
+      {
+        b -= 48;
+      }
+      char c;
+      if (expr[i] == '*')
+      {
+        c = b * a;
+      }
+      else if (expr[i] == '+')
+      {
+        c = b + a;
+      }
+      else if (expr[i] == '-')
+      {
+        c = b - a;
+      }
+      else
+      {
+        c = b / a;
+      }
+      printf("%d %d %d\n", a, b, c);
+      push(&s, c);
+    }
+    else
+    {
+      push(&s, expr[i]);
+    }
+  }
+
+  printf("%d", s.data[0]);
   return 0;
 }
