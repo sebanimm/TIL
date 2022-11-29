@@ -2,27 +2,25 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef char element;
-
 typedef struct Node
 {
   char data[100];
   struct Node *next;
 } Node;
 
-Node *insertFirst(Node *head, char *value[])
+Node *insertFirst(Node *head, char *data)
 {
   Node *p = (Node *)malloc(sizeof(Node));
-  p->data = value;
+  strcpy(p->data, data);
   p->next = head;
   head = p;
   return head;
 }
 
-Node *insert(Node *head, Node *pre, element value)
+Node *insert(Node *head, Node *pre, char data)
 {
   Node *p = (Node *)malloc(sizeof(Node));
-  p->data = value;
+  strcpy(p->data, data);
   p->next = pre->next;
   pre->next = p;
   return head;
@@ -52,7 +50,7 @@ void printList(Node *head)
 {
   while (head != NULL)
   {
-    printf("%d->", p->data);
+    printf("%s->", head->data);
     head = head->next;
   }
   printf("NULL\n");
@@ -62,7 +60,7 @@ int main(void)
 {
   Node *head = NULL;
   Node *p;
-  char str[3][10] = {"melon", "kiwi", "appple"};
+  char str[3][10] = {"melon", "kiwi", "apple"};
   char find[10];
   //코드 작성
   head = insertFirst(head, str[0]); // melon 입력
