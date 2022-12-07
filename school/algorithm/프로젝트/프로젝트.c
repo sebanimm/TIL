@@ -23,6 +23,7 @@ typedef struct
   struct BookInfo *next;
 } BookInfo;
 
+// 스택
 void initStack(BookType *bt)
 {
   bt->top = -1;
@@ -59,14 +60,7 @@ element pop(BookType *bt)
   return bt->type[(bt->top)--];
 }
 
-BookInfo *createList()
-{
-  BookInfo *head = (BookInfo *)malloc(sizeof(BookInfo));
-  head = NULL;
-
-  return head;
-}
-
+// 연결리스트
 BookInfo *deleteAll(BookInfo *head)
 {
   BookInfo *p = head;
@@ -85,13 +79,15 @@ BookInfo *deleteAll(BookInfo *head)
 
 void printList(BookInfo *head)
 {
-  printf("\n\n======== 현재 책 종류 ========\n");
+  int i = 1;
+  printf("\n\n======== 현재 도서 목록 ========\n");
   while (head != NULL)
   {
+    head->index = i++;
     printf("\n[%d] %s", head->index, head->bookName);
     head = head->next;
   }
-  printf("\n\n=============================\n\n");
+  printf("\n\n================================\n\n");
 }
 
 BookInfo *insertFirst(BookInfo *head, char *x)
@@ -153,8 +149,20 @@ BookInfo *searchNode(BookInfo *head, char *x)
   return temp;
 }
 
-char bookType[100];
-int select;
+BookInfo *reverse(BookInfo *head)
+{
+  BookInfo *p, *q, *r;
+  p = head;
+  q = NULL;
+  while (p != NULL)
+  {
+    r = q;
+    q = p;
+    p = p->next;
+    q->next = r;
+  }
+  return q;
+}
 
 int main()
 {
@@ -171,17 +179,19 @@ int main()
   BookInfo *p;
   char bookInfo[100];
   int bookIndex;
-  int i = 1;
+  char bookType[100];
+  int select;
   while (1)
   {
-    printf("히히선택하세요\n1 : 추가\n2 : 삭제\n3 : 끈다\n");
+    printf("히히선택하세요\n1 : 추가\n2 : 삭제\n3 : 초기화\n4 : 프로그램 종료\n");
     scanf("%d", &select);
     if (select == 1)
     {
       printf("추가할거 넣으세요 \n");
       scanf("%s", bookInfo);
       head = insertFirst(head, bookInfo);
-      printf("추가됐음\n");
+      printf("추가됐음");
+      head = reverse(head);
       printList(head);
     }
     else if (select == 2)
@@ -189,18 +199,25 @@ int main()
       printf("몇번인덱스 삭제할건지 말하세요 \n");
       scanf("%d", bookIndex);
       insertFirst(head, bookIndex);
-      printf("삭제됐음\n");
+      printf("삭제됐음");
       printList(head);
     }
     else if (select == 3)
+    {
+      printf("도서 목록을 초기화합니다.");
+      head = deleteAll(head);
+      printList(head);
+    }
+    else if (select == 4)
     {
       printf("프로그램이 종료됩니다.");
       exit(0);
     }
     else
     {
-      printf("다시 입력해주세요.\n");
+      printf("다시 입력해주세요.");
     }
+    printf("\n");
   }
   return 0;
 }
