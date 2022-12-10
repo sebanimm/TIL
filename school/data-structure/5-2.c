@@ -91,4 +91,6 @@ element pop(Stack *s)
     printf("Stack is Empty");
     return 0;
   }
+
+  return s->data[s->top--];
 }
