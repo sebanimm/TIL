@@ -1,7 +1,5 @@
-import { init, exit } from "myPackage";
+import { init, exit } from "./myPackage";
 
-init({
-	url: "asd",
-});
+init({ debug: true, url: "사밀" });
 
 exit(1);
