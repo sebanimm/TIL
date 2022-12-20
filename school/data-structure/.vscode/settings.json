@@ -1,8 +1,10 @@
 {
 	"files.associations": {
+		"*.c": "c",
 		"stdlib.h": "c",
 		"typeinfo": "c",
-		"11-2.C": "cpp"
+		"11-2.C": "cpp",
+		"memory.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }
