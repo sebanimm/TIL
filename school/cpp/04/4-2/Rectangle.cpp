@@ -5,26 +5,28 @@ using namespace std;
 class Rectangle
 {
 private:
-  Point point1;
-  Point point2;
+  Point upLeft;
+  Point lowRight;
 
 public:
-  bool InitMembers(const Point &a, const Point &b)
+  bool InitMembers(const Point &ul, const Point &lr)
   {
-    if (a.jwapyo[0] > b.jwapyo[1] || a.jwapyo[0] > b.jwapyo[1])
+    if (ul.GetX() > lr.GetX() || ul.GetY() > lr.GetY())
     {
       cout << "잘못된 위치정보 전달" << endl;
       return false;
     }
 
-    point1 = a;
-    point2 = b;
+    upLeft = ul;
+    lowRight = lr;
     return true;
   }
   void ShowRecInfo() const
   {
-    cout << "좌 상단: " << '[' << point1.jwapyo[0] << ", " << point1.jwapyo[1] << ']' << endl;
-    cout << "우 하단: " << '[' << point2.jwapyo[0] << ", " << point2.jwapyo[1] << ']' << endl
+    cout << "좌 상단: " << '[' << upLeft.GetX() << ", ";
+    cout << upLeft.GetY() << ']' << endl;
+    cout << "우 하단: " << '[' << lowRight.GetX() << ", ";
+    cout << lowRight.GetY() << ']' << endl
          << endl;
   }
 };
