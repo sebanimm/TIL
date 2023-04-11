@@ -1,42 +1,18 @@
-#include <iostream>
-#include <cstring>
+#include <stdio.h>
+#include <algorithm>
 using namespace std;
 
-class Person
+int main()
 {
-  char *name;
-  int age;
-
-public:
-  Person(char *myname, int myage)
+  int n, a[101], b[10001], c[101];
+  scanf("%d", &n);
+  for (int i = 0; i < n; i++)
   {
-    int len = strlen(myname) + 1;
-    name = new char[len];
-    strcpy(name, myname);
-    age = myage;
+    scanf("%d %d", &a[i], &b[i]);
+    c[i] = a[i];
   }
-  void ShowPersonInfo() const
-  {
-    cout << "이름: " << name << endl;
-    cout << "나이: " << age << endl;
-  }
-  Person(Person &copy) : age(copy.age)
-  {
-    name = new char[strlen(copy.name) + 1];
-    cout << "복사함" << endl;
-  }
-  ~Person()
-  {
-    delete[] name;
-    cout << "called destructor!" << endl;
-  }
-};
-
-int main(void)
-{
-  Person man1("Lee dong woo", 29);
-  Person man2 = man1;
-  man1.ShowPersonInfo();
-  man2.ShowPersonInfo();
+  sort(a, a + n);
+  for (int i = 0; i < n; i++)
+    printf("%d %d\n", a[i], b[c[i]]);
   return 0;
 }
