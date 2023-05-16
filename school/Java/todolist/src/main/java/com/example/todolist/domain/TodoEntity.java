@@ -1,25 +1,37 @@
-package com.example.todolist.domain;
+package com.example.TodoList.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Entity
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
+
 public class TodoEntity {
-    @Id
+    @Id //primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     private String content;
-    @Column(nullable = false)
+
+    @Column(nullable = false) //not null
     private Boolean completed;
+
     @Builder
     public TodoEntity(String content, Boolean completed) {
         this.content = content;
         this.completed = completed;
     }
+
+    public void updateContent(String content) {
+        this.content = content;
+    };
+
+    public void updateCompleted(Boolean completed) {
+        this.completed = completed;
+    };
 }
