@@ -10,7 +10,7 @@ public:
   SoSimple()
   {
     simObjCnt++;
-    cout << simObjCnt << "©ö©ª?¡Æ SoSimple ¡Æ¢¥?¨ù" << endl;
+    cout << simObjCnt << "¹øÂ° SoSimple °´Ã¼" << endl;
   }
 };
 int SoSimple::simObjCnt = 0;
@@ -24,12 +24,12 @@ public:
   SoComplex()
   {
     cmxObjCnt++;
-    cout << cmxObjCnt << "©ö©ª?¡Æ SoComplex ¡Æ¢¥?¨ù" << endl;
+    cout << cmxObjCnt << "¹øÂ° SoComplex °´Ã¼" << endl;
   }
   SoComplex(SoComplex &copy)
   {
     cmxObjCnt++;
-    cout << cmxObjCnt << "©ö©ª?¡Æ SoComplex ¡Æ¢¥?¨ù" << endl;
+    cout << cmxObjCnt << "¹øÂ° SoComplex °´Ã¼" << endl;
   }
 };
 int SoComplex::cmxObjCnt = 0;

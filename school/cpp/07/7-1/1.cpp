@@ -1,56 +1,60 @@
 #include <iostream>
 using namespace std;
 
-class car
+class SoBase
 {
 private:
-  int gasoline;
+  int baseNum;
 
 public:
-  car(int n) : gasoline(n)
+  SoBase() : baseNum(20)
   {
+    cout << "SoBase()" << endl;
   }
-  int getgas()
+  SoBase(int n) : baseNum(n)
   {
-    return gasoline;
+    cout << "SoBase(int n)" << endl;
+  }
+  void ShowBaseData()
+  {
+    cout << baseNum << endl;
   }
 };
 
-class hybridcar : public car
+class SoDerived : public SoBase
 {
 private:
-  int electric;
+  int derivNum;
 
 public:
-  hybridcar(int n, int m) : car(n), electric(m)
+  SoDerived() : derivNum(30)
   {
+    cout << "SoDerived()" << endl;
   }
-  int getelec()
+  SoDerived(int n) : derivNum(n)
   {
-    return electric;
+    cout << "SoDerived(int n)" << endl;
+  }
+  SoDerived(int n1, int n2) : SoBase(n1), derivNum(n2)
+  {
+    cout << "SoDerived(int n1, int n2)" << endl;
+  }
+  void ShowDerivData()
+  {
+    ShowBaseData();
+    cout << derivNum << endl;
   }
 };
 
-class hybridwatercar : public hybridcar
+int main(void)
 {
-private:
-  int watergauge;
-
-public:
-  hybridwatercar(int n, int m, int l) : hybridcar(n, m), watergauge(l)
-  {
-  }
-  void show()
-  {
-    cout << getgas() << endl;
-    cout << getelec() << endl;
-    cout << watergauge << endl;
-  }
-};
-
-int main()
-{
-  hybridwatercar c3(79, 65, 35);
-  c3.show();
+  SoDerived dr1;
+  dr1.ShowDerivData();
+  cout << "-------------------" << endl;
+  SoDerived dr2(12);
+  dr2.ShowDerivData();
+  cout << "-------------------" << endl;
+  SoDerived dr3(23, 24);
+  dr3.ShowDerivData();
   return 0;
-}
+};
