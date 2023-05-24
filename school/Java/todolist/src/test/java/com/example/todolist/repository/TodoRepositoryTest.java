@@ -1,6 +1,6 @@
-package com.example.TodoList.repository;
+package com.example.todolist.repository;
 
-import com.example.TodoList.domain.TodoEntity;
+import com.example.todolist.domain.TodoEntity;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +16,22 @@ class TodoRepositoryTest {
     TodoRepository todoRepository;
 
     @AfterEach
-    public void reset(){
-        //디비초기화
+    public void 초기화(){
+        //디비 초기화
         todoRepository.deleteAll();
     }
 
     @Test
-    public void saveValues(){
+    public void 값저장(){
         //1. 엔티티 하나 만들기
-        TodoEntity entity = TodoEntity.builder().content("a content").completed(false).build();
-
+        TodoEntity entity = TodoEntity.builder()
+                .content("a content")
+                .completed(false)
+                .build();
         //2. 디비에 저장
         todoRepository.save(entity);
-
         //3. 확인
         List<TodoEntity> all = todoRepository.findAll();
         assertEquals(all.get(0).getContent(), "a content");
-
     }
 }

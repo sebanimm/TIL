@@ -1,4 +1,4 @@
-package com.example.TodoList.domain;
+package com.example.todolist.domain;
 
 import lombok.*;
 
@@ -6,19 +6,16 @@ import javax.persistence.*;
 
 @Getter
 @Entity
-@Setter
-@AllArgsConstructor
 @NoArgsConstructor
-
 public class TodoEntity {
-    @Id //primary key
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
     private String content;
 
-    @Column(nullable = false) //not null
+    @Column(nullable = false)
     private Boolean completed;
 
     @Builder
@@ -29,9 +26,9 @@ public class TodoEntity {
 
     public void updateContent(String content) {
         this.content = content;
-    };
+    }
 
     public void updateCompleted(Boolean completed) {
         this.completed = completed;
-    };
+    }
 }
