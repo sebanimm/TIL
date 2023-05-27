@@ -1,4 +1,6 @@
-import { createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
+import { createLogger } from "redux-logger";
+import thunk from "redux-thunk";
 
 const ADD = "ADD";
 const DELETE = "DELETE";
@@ -16,7 +18,16 @@ export const deleteTodo = (id) => {
 		id: parseInt(id),
 	};
 };
-
+export const addTodoAsync = () => (dispatch) => {
+	setTimeout(() => {
+		dispatch(addTodo(), 1000);
+	});
+};
+export const deleteTodoAsync = () => (dispatch) => {
+	setTimeout(() => {
+		dispatch(deleteTodo(), 1000);
+	});
+};
 const reducer = (state = [], action) => {
 	switch (action.type) {
 		case ADD:
@@ -28,6 +39,8 @@ const reducer = (state = [], action) => {
 	}
 };
 
-const store = createStore(reducer);
+const logger = createLogger();
+
+const store = createStore(reducer, applyMiddleware(logger, thunk));
 
 export default store;
