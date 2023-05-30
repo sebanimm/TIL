@@ -21,7 +21,7 @@ public class StudentJpaRepositoryTest {
     public void a() {
         // 0. 학과 객체 만들고 저장
         Department department = Department.builder()
-                .name("")
+                .name("SW")
                 .personnel(32L)
                 .build();
         departmentJpaRepository.save(department);

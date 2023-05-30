@@ -30,4 +30,8 @@ public class Student {
         this.gender = gender;
         this.department = department;
     }
+
+    public void chooseDept(Department department) {
+        this.department = department;
+    }
 }
