@@ -130,7 +130,7 @@ public class BST implements BSTInterface {
     public void inOrder(MyNode node) {
         if (node != null) {
             inOrder(node.left);
-            System.out.print(node.val ue + " ");
+            System.out.print(node.value + " ");
             inOrder(node.right);
         }
     }
