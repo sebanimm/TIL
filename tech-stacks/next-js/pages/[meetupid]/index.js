@@ -1,46 +1,58 @@
+import { MongoClient, ObjectId } from "mongodb";
 import MeetupDetail from "@/components/meetups/MeetupDetail";
 
-const MeetupDetails = () => {
+const MeetupDetails = (props) => {
   return (
     <MeetupDetail
-      image="https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp"
-      title="First meetup"
-      address="부산진구 전포대로 275번길 20"
-      description="설명설명설명"
+      image={props.meetupData.image}
+      title={props.meetupData.title}
+      address={props.meetupData.address}
+      description={props.meetupData.description}
     />
   );
 };
 
 export const getStaticPaths = async () => {
+  const client = await MongoClient.connect(
+    "mongodb+srv://user:1234@cluster0.2coaecx.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp",
+  );
+  const db = client.db();
+
+  const meetupsCollection = db.collection("meetups");
+
+  const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray();
+
+  client.close();
   return {
     fallback: false,
-    paths: [
-      {
-        params: {
-          meetupId: "m1",
-        },
-      },
-      {
-        params: {
-          meetupId: "m2",
-        },
-      },
-    ],
+    paths: meetups.map((meetup) => ({
+      params: { meetupId: meetup._id.toString() },
+    })),
   };
 };
 
 export const getStaticProps = async (context) => {
   const meetupId = context.params.meetupId;
-  console.log(meetupId);
+  const client = await MongoClient.connect(
+    "mongodb+srv://user:1234@cluster0.2coaecx.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp",
+  );
+  const db = client.db();
+
+  const meetupsCollection = db.collection("meetups");
+
+  const selectedMeetup = await meetupsCollection.findOne({
+    _id: new ObjectId(meetupId),
+  });
+
+  client.close();
   return {
     props: {
       meetupData: {
-        id: meetupId,
-        title: "테스트",
-        image:
-          "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
-        address: "부산진구 전포대로 275번길 20",
-        description: "하하",
+        id: selectedMeetup._id.toString(),
+        title: selectedMeetup.title,
+        address: selectedMeetup.address,
+        description: selectedMeetup.description,
+        image: selectedMeetup.image,
       },
     },
   };
