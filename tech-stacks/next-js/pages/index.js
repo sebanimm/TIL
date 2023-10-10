@@ -1,63 +1,5 @@
+import { MongoClient } from "mongodb";
 import MeetupList from "@/components/meetups/MeetupList";
-
-const DUMMY = [
-  {
-    id: "m1",
-    title: "테스트",
-    image:
-      "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
-    address: "부산진구 전포대로 275번길 20",
-    description: "하하",
-  },
-  {
-    id: "m2",
-    title: "테스트",
-    image:
-      "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
-    address: "부산진구 전포대로 275번길 20",
-    description: "하하",
-  },
-  {
-    id: "m3",
-    title: "테스트",
-    image:
-      "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
-    address: "부산진구 전포대로 275번길 20",
-    description: "하하",
-  },
-  {
-    id: "m4",
-    title: "테스트",
-    image:
-      "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
-    address: "부산진구 전포대로 275번길 20",
-    description: "하하",
-  },
-  {
-    id: "m5",
-    title: "테스트",
-    image:
-      "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
-    address: "부산진구 전포대로 275번길 20",
-    description: "하하",
-  },
-  {
-    id: "m6",
-    title: "테스트",
-    image:
-      "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
-    address: "부산진구 전포대로 275번길 20",
-    description: "하하",
-  },
-  {
-    id: "m7",
-    title: "테스트",
-    image:
-      "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
-    address: "부산진구 전포대로 275번길 20",
-    description: "하하",
-  },
-];
 
 const HomePage = ({ meetups }) => {
   return <MeetupList meetups={meetups} />;
@@ -75,11 +17,27 @@ const HomePage = ({ meetups }) => {
 // };
 
 export const getStaticProps = async () => {
+  const client = await MongoClient.connect(
+    "mongodb+srv://user:1234@cluster0.2coaecx.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp",
+  );
+  const db = client.db();
+
+  const meetupsCollection = db.collection("meetups");
+
+  const meetups = await meetupsCollection.find().toArray();
+
+  client.close();
+
   return {
     props: {
-      meetups: DUMMY,
+      meetups: meetups.map((meetup) => ({
+        title: meetup.title,
+        address: meetup.address,
+        image: meetup.image,
+        id: meetup._id.toString(),
+      })),
     },
-    revalidate: 10,
+    revalidate: 1,
   };
 };
 
