@@ -2,7 +2,7 @@ import MeetupList from "@/components/meetups/MeetupList";
 
 const DUMMY = [
   {
-    id: "1",
+    id: "m1",
     title: "테스트",
     image:
       "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
@@ -10,7 +10,7 @@ const DUMMY = [
     description: "하하",
   },
   {
-    id: "2",
+    id: "m2",
     title: "테스트",
     image:
       "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
@@ -18,7 +18,7 @@ const DUMMY = [
     description: "하하",
   },
   {
-    id: "3",
+    id: "m3",
     title: "테스트",
     image:
       "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
@@ -26,7 +26,7 @@ const DUMMY = [
     description: "하하",
   },
   {
-    id: "4",
+    id: "m4",
     title: "테스트",
     image:
       "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
@@ -34,7 +34,7 @@ const DUMMY = [
     description: "하하",
   },
   {
-    id: "5",
+    id: "m5",
     title: "테스트",
     image:
       "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
@@ -42,7 +42,7 @@ const DUMMY = [
     description: "하하",
   },
   {
-    id: "6",
+    id: "m6",
     title: "테스트",
     image:
       "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
@@ -50,7 +50,7 @@ const DUMMY = [
     description: "하하",
   },
   {
-    id: "7",
+    id: "m7",
     title: "테스트",
     image:
       "https://i.namu.wiki/i/8lZkhpeYBEb9X7W6ftPBZcDUXSOBkH3hD-yYct146HIBtons4ADYWb5dr_VZDToboBX0ZVA0DV87VNdGN84_Og.webp",
@@ -59,8 +59,28 @@ const DUMMY = [
   },
 ];
 
-const HomePage = () => {
-  return <MeetupList meetups={DUMMY} />;
+const HomePage = ({ meetups }) => {
+  return <MeetupList meetups={meetups} />;
+};
+
+// export const getServerSideProps = async (context) => {
+//   const req = context.req;
+//   const res = context.res;
+
+//   return {
+//     props: {
+//       meetups: DUMMY,
+//     },
+//   };
+// };
+
+export const getStaticProps = async () => {
+  return {
+    props: {
+      meetups: DUMMY,
+    },
+    revalidate: 10,
+  };
 };
 
 export default HomePage;
