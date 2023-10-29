@@ -1,4 +1,4 @@
-package part01_structure.ch02_bct;
+package part01_structure.ch02_bst;
 
 public class BSTTest {
     public static void main(String[] args) {

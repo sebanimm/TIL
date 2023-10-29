@@ -12,7 +12,7 @@ public class Philosopher extends Thread{
     @Override
     public void run() {
         // 0.5초 이내 값. 0이면 교착상태
-        int randTime = 0; //(int)((Math.random() * 1000) + 500);
+        int randTime = (int)((Math.random() * 1000) + 500);
         try {
             System.out.println(name + " : " + randTime + "ms wait");
             Thread.sleep(randTime);

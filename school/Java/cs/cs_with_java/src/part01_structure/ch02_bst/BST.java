@@ -1,4 +1,4 @@
-package part01_structure.ch02_bct;
+package part01_structure.ch02_bst;
 
 public class BST implements BSTInterface {
     MyNode root;
