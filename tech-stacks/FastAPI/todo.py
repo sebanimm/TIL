@@ -24,3 +24,8 @@ async def get_single_todo(todo_id: Annotated[int, Path()]) -> dict:
         if todo.id == todo_id:
             return {"todo": todo}
     return {"message": "Todo with supplied ID doesn't exist."}
+
+
+@todo_router.get("/query/")
+async def query_route(q: Annotated[str | None, Query()] = None):
+    return q
