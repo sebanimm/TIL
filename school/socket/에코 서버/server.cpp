@@ -27,8 +27,9 @@ SOCKET SetTCPSServer(short pnum, int blog)
     return sock;
 }
 
-void DoIt(SOCKET dosock)
+void DoIt(void* params)
 {
+    SOCKET dosock = (SOCKET)params;
     char msg[MAX_MSG_LEN] = "";
     while (recv(dosock, msg, sizeof(msg), 0) > 0) // 수신
     {
@@ -52,7 +53,7 @@ void AcceptLoop(SOCKET sock)
             break;
         }
         cout << inet_ntoa(cliaddr.sin_addr) << ":" << ntohs(cliaddr.sin_port) << "의 연결 요청 수락" << endl;
-        DoIt(dosock);
+        _beginthread(DoIt, 0, (void*) dosock);
     }
     closesocket(sock); // 소켓 닫기
 }
