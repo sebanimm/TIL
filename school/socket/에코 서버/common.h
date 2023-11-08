@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <process.h>
+#include <algorithm>
 using namespace std;
 #pragma comment(lib, "ws2_32")
 #pragma warning(disable:4996)
